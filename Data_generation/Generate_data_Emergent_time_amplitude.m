@@ -18,36 +18,12 @@ kt = 1 - ku - kd;
 Ad = [1 1.5 2 2.5 3];
 
 for p1i = 1:1:length(P1allnew)
-    P1 = P1allnew(1,p1i);
-    P2_nominal = P2new(1,p1i);
-    
+    P1 = P1allnew(1,p1i);    
     for ai = 1:1:5
           filestr = ['Emergent_time_amplitude/dataasync_' num2str(p1i) '_' num2str(ai) '.mat'];
           load(filestr,'P2'); 
           out = sim('async_flier_modelling_non_d.slx',500);
           async_flier_model_params_non_d
-%           A = max(disp) - min(disp);
-%           if abs(A - Ad(1,ai)) < 0.025
-%           elseif A - Ad(1,ai) > 0.025
-%               while abs(A - Ad(1,ai)) > 0.025 && P2 > 0
-%                    P1 = P1allnew(1,p1i);
-%                    P2 = P2 - 0.05;
-%                    out = sim('async_flier_modelling_non_d.slx',500);
-%                    async_flier_model_params_non_d
-%                    A = max(disp) - min(disp);
-%                    A
-%               end
-%           elseif A - Ad(1,ai) < -0.025
-%               while abs(A - Ad(1,ai)) > 0.025 && P2 < 10
-%                    P1 = P1allnew(1,p1i);
-%                    P2 = P2 + 0.05;
-%                    out = sim('async_flier_modelling_non_d.slx',500);
-%                    async_flier_model_params_non_d
-%                    A = max(disp) - min(disp);
-%                    A
-%               end
-%           end
-        
           Otherparams(1,1) = dampmaxwork;
           Otherparams(1,2) = maxdspringwork;
           Otherparams(1,3) = maxinertiaenergy;
