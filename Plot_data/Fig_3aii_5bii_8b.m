@@ -149,32 +149,3 @@ set(gca, 'XScale', 'log');
 xlim(XL);
 ylim(YL);
 
-
-figure(9)
-K = colormap(turbo(200));
-K2 = [K(1:160,:); repmat(K(160,:),1000,1)];
-
-surf(1./P1allfinal(1,indicesp1), P3all, phi_workloop,'edgecolor','none','facecolor','interp');
-colormap(K2);
-xlim([1./P1allfinal(1,end) 10]);
-ylim([min(P3all) max(P3all)]);
-XL = get(gca,'Xlim');
-YL = get(gca,'Ylim');
-view(0,90);
-set(gca, 'XScale', 'log');
-set(gca,'XTick',[], 'YTick', []);
-grid off
-
-
-figure(10)
-xlabel('P1');
-ylabel('P3');
-load('frequencies_RE.mat');
-h(1) = plot(ones(1,3)./P1_hawkmoth,F(1).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-hold on;
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-legend(h,'hawkmoth','hummingbirds');
-set(gca, 'XScale', 'log');
-xlim(XL);
-ylim(YL);
-
