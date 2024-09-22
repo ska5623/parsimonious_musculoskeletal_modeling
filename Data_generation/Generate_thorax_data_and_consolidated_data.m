@@ -38,11 +38,11 @@ for p3i = 1:1:length(P3all)
         in(index) = in(index).setVariable('P3',P3);
         index = index + 1;
     end
-    outall = sim(in,'ShowProgress','off');
-    % outall(1:8) = parsim(in(1:8),'ShowProgress','off');
-    % outall(9:16) = parsim(in(9:16),'ShowProgress','off');
-    % outall(17:24) = parsim(in(17:24),'ShowProgress','off');
-    % outall(25:32) = parsim(in(25:32),'ShowProgress','off');
+    %outall = sim(in,'ShowProgress','off');
+    outall(1:8) = parsim(in(1:8),'ShowProgress','off');
+    outall(9:16) = parsim(in(9:16),'ShowProgress','off');
+    outall(17:24) = parsim(in(17:24),'ShowProgress','off');
+    outall(25:27) = parsim(in(25:27),'ShowProgress','off');
     % outall(33:length(P1allfinal)) = parsim(in(33:length(P1allfinal)),'ShowProgress','off');
     index = 1;
     for p1i = 1:1:length(P1allfinal)
