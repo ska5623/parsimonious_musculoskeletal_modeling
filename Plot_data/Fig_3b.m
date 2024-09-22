@@ -1,8 +1,8 @@
-P1allfinal = [0.01 0.02 0.03 0.04 0.05 0.075 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 15 20 32];
+P1allfinal = [0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 P3all = [0.4 0.6 0.8 0.9 1 1.1 1.2 1.4 1.6 1.8 2.0 2.2];
 Achange_all = [0.6 0.8 1.0 1.2 1.4];
 
-indicesp1 = [7:31 34:36];
+indicesp1 = 1:1:length(P1allfinal);
 P2all_sync = zeros(length(P3all),length(P1allfinal));
 for p3i = 1:1:length(P3all)
     P3 = P3all(p3i);
@@ -20,7 +20,6 @@ for p3i = 1:1:length(P3all)-1
 end
 
 for p1i = 1:1:length(P1allfinal)
-    % P2all_sync1(:,p1i) = smooth(P3all,P2all_sync(:,p1i),2);
     for p3i = 1:1:length(P3all)-1 
        freq_mod(p3i,p1i) = abs(1/P2all_sync(p3i+1,p1i) - 1/P2all_sync(p3i,p1i))/(P3all(p3i+1) - P3all(p3i));
     end

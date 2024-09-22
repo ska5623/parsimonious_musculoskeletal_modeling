@@ -1,4 +1,4 @@
-P1allfinal = [0.01 0.02 0.03 0.04 0.05 0.075 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 15 20 32];
+P1allfinal = [0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 MTall = [0 0.25 0.5 0.75 1];
 
 %% active force phase
@@ -8,7 +8,6 @@ load('hawkmoth.mat')
 P3all = [0.4 0.6 0.8 0.9 1 1.1 1.2 1.4 1.6 1.8 2.0 2.2];
 P1all_async = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 Phaseall = zeros(length(P1allfinal), length(P3all));
-P1allfinal = [0.01 0.02 0.03 0.04 0.05 0.075 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 15 20];
 
 for p1i = 1:1:length(P1allfinal)   
         for p3i = 1:1:length(P3all)
@@ -28,8 +27,7 @@ end
 
 C = copper(6);
 C2 = turbo(9);
-indicesp1 = 7:1:35;
-
+indicesp1 = 1:1:length(P1allfinal);
 
 figure(1)
 surf(1./P1allfinal(1,indicesp1), P3all, Phaseall(indicesp1,:)','edgecolor','none','facecolor','interp');
@@ -44,9 +42,6 @@ set(gca, 'XScale', 'log');
 set(gca,'XTick',[], 'YTick', []);
 grid off
 
-
-%legend(h,'0.8','0.9','1','1.1','1.2','async');
-%set(gca, 'YScale', 'log');
 
 figure(2)
 xlabel('P1');

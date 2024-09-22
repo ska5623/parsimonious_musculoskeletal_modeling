@@ -2,7 +2,7 @@ Time_period_all = zeros(5,31);
 ME = zeros(5,31);
 P1allnew = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 
-for p1i = 1:1:31
+for p1i = 1:1:length(P1allnew)
     for ai = 1:1:5
           filestr = ['Emergent_time_amplitude/dataasync_' num2str(p1i) '_' num2str(ai) '.mat'];
           load(filestr);
@@ -13,7 +13,7 @@ for p1i = 1:1:31
     end 
 end
 
-figure(3);
+figure(1);
 C = copper(5);
 plot(1./P1allnew,ME(1,:),'color',C(1,:));
 hold on

@@ -1,7 +1,8 @@
 clear;
 load('bumblebee.mat')
+P1all_async = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 
-for p1i = 1:1:31
+for p1i = 1:1:length(P1all_async)
     filestr = ['Thorax data async/dataasync_thorax_1_' num2str(p1i)  '.mat'];
     load(filestr);
     Total_muscle_work_async(1,p1i) = max(abs(posforcework)) + max(abs(negforcework));
@@ -10,7 +11,6 @@ for p1i = 1:1:31
     forceamp_all(1,p1i) = max(posforce);
 end
 
-P1all_async = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 filestr = ['Consolidated_data_async/async_all_data_final_0.5.mat'];
 load(filestr);
 phi_inertia_async = Otherparams(:,4);
@@ -25,7 +25,7 @@ load('vel_async.mat')
 C = copper(6);
 C2 = turbo(9);
 
-figure(7)
+figure(1)
 h(1) = plot(1./P1all_async,phi_workloop_async,'-','color',C(6,:));
 hold on;
 h(2) = plot(1./P1_bumblebee(1,1),bumblebee_data(1,2),'-o','color',C2(9,:),'MarkerFaceColor',C2(9,:));
@@ -37,7 +37,7 @@ set(gca, 'XScale', 'log');
 saveas(gcf,'C:\Users\suyas\OneDrive - The Pennsylvania State University\Box sync\PhD\Journal papers\Work loop paper\Figures\pdfs\contours\WL_async.pdf')
 
 
-figure(11)
+figure(2)
 h(1) = plot(1./P1all_async, Min_Spring_energy_async.*phi_inertia_async','-','color',C(6,:));
 hold on;
 h(2) = plot(1./P1_bumblebee(1,1),bumblebee_data(1,4)*bumblebee_data(1,1),'-o','color',C2(9,:),'MarkerFaceColor',C2(9,:));
