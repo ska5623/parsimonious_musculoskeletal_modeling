@@ -1,4 +1,4 @@
-P1allnew = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 15 20 32];
+P1allnew = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 t0 = 0.5;
 
 xu_min = 0.5;
@@ -13,7 +13,7 @@ kt = 1 - ku - kd;
 P2initial = 0.1;
 Otherparams = zeros(length(P1allnew),7);
 P2new = zeros(1,length(P1allnew));
-for p1i = 1:1:2 % length(P1allnew)
+for p1i = 1:1:length(P1allnew)
     P1 = P1allnew(1,p1i);
     if p1i == 1
         P2 = P2initial;
