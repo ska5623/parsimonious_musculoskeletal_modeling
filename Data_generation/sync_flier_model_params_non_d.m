@@ -5,7 +5,7 @@ L = length(locs);
 si = locs(L-2,1);
 ei = locs(L-1,1);
 k = L-2;
-while abs(disp(si,1) - disp(ei,1)) > 0.1 
+while abs(disp(si,1) - disp(ei,1)) > 0.1
     si = locs(k-1,1);
     k = k - 1;
 end
