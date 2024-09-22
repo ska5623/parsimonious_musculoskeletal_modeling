@@ -19,6 +19,7 @@ limitsalln(4,15:24) = 0.04;
 limitsalln(4,25:length(P1allfinal)) = 0.1;
 dt = 0.001;
 P2initial = 1;
+Otherparams = zeros(length(P1allfinal),length(P3all));
 for p3i = 1:1:length(P3all)
     P3 = P3all(p3i);
     P2new = zeros(1,length(P1allfinal));
@@ -76,7 +77,6 @@ for p3i = 1:1:length(P3all)
             index = index + 1;
         end
 
-        Otherparams = zeros(7,1);
         Otherparams(p1i,1) = dampmaxwork;
         Otherparams(p1i,2) = maxdspringwork;
         Otherparams(p1i,3) = maxinertiaenergy;

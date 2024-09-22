@@ -3,6 +3,13 @@ P1allnew = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 
 Achange_all = [0.6 0.8 1.0 1.2 1.4];
 
 t0 = 0.5;
+limitasyncn = zeros(length(P1allnew),1);
+limitasyncn(1:5,1) = 0.003;
+limitasyncn(6:10,1) = 0.006;
+limitasyncn(11:15,1) = 0.01;
+limitasyncn(16:20,1) = 0.02;
+limitasyncn(21:25,1) = 0.04;
+limitasyncn(25:length(P1allnew),1) = 0.08;
 
 filestr = ['Consolidated_data_async/async_all_data_final_' num2str(t0) '.mat'];
 load(filestr);
@@ -25,24 +32,26 @@ for p1i = 1:1:length(P1allnew)
           out = sim('async_flier_modelling_non_d.slx',500);
           async_flier_model_params_non_d
           A = max(disp) - min(disp);
+          Aolddiff = abs(A - Ad(1,ai));
+          limitasync = limitasyncn;
           if abs(A - Ad(1,ai)) < 0.025
-          elseif A - Ad(1,ai) > 0.025
+          else
+              index = 1;
               while abs(A - Ad(1,ai)) > 0.025 && P2 > 0
-                  P1 = P1allnew(1,p1i);
-                  P2 = P2 - 0.05;
+                  if index > 1 && abs(A-Ad(1,ai)) > Aolddiff
+                      limitasync = limitasync/2;
+                  end
+                  if A - Ad(1,ai) > 0.025
+                      P2 = P2 - limitasync(p1i,1);
+                  elseif A - Ad(1,ai) < -0.025
+                      P2 = P2 + limitasync(p1i,1);
+                  end
                   out = sim('async_flier_modelling_non_d.slx',500);
                   async_flier_model_params_non_d
+                  Aolddiff = abs(A - Ad(1,ai));
                   A = max(disp) - min(disp);
-                  A
-              end
-          elseif A - Ad(1,ai) < -0.025
-              while abs(A - Ad(1,ai)) > 0.025 && P2 < 10
-                  P1 = P1allnew(1,p1i);
-                  P2 = P2 + 0.05;
-                  out = sim('async_flier_modelling_non_d.slx',500);
-                  async_flier_model_params_non_d
-                  A = max(disp) - min(disp);
-                  A
+                  [P2 A]
+                  index = index + 1;
               end
           end
           Otherparams(1,1) = dampmaxwork;
