@@ -3,8 +3,8 @@ P3all = [0.4 0.6 0.8 0.9 1 1.1 1.2 1.4 1.6 1.8 2.0 2.2];
 P1allfinal = [0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 P1all_async = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
 
-load('hummingbird.mat')
-load('hawkmoth.mat')
+load('hummingbird.mat');
+load('hawkmoth.mat');
 si = 1;
 ei = length(P1allfinal);
 indicesp1 = si:1:ei;
@@ -29,8 +29,8 @@ for p3i = 1:1:length(P3all)
         dispall(p3i,p1i-si+1) = max(disp) - min(disp);
         Waall(p3i,p1i-si+1) = max(aerowork);
         Total_muscle_work(p3i,p1i-si+1) = max(abs(posforcework)) + max(abs(negforcework));
-        Min_Spring_energy(p3i,p1i-si+1) = min(uspringwork + dspringwork)/max(inertiaenergy);
-        Min_Spring_energy2(p3i,p1i-si+1) = min(uspringwork + dspringwork + tspringwork)/max(inertiaenergy);
+        Min_Spring_energy(p3i,p1i-si+1) = min(dspringwork + uspringwork)/max(inertiaenergy);
+        Min_Spring_energy2(p3i,p1i-si+1) = min(dspringwork + uspringwork + tspringwork)/max(inertiaenergy);
     end
 end
 
