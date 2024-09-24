@@ -56,19 +56,6 @@ set(gca,'XTick',[], 'YTick', [])
 grid off
 
 figure(2)
-xlabel('P1');
-ylabel('P3');
-load('frequencies_RE.mat');
-h(1) = plot(1./repelem(P1_hawkmoth,3),F(1).f,'-o','color',C2(1,:),'MarkerFaceColor',C2(1,:));
-hold on;
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-legend(h,'hawkmoth','hummingbird');
-title('Phi_workloop');
-set(gca, 'XScale', 'log');
-xlim(XL);
-ylim(YL);
-
-figure(3)
 K = colormap(turbo(200));
 K2 = [K(1:160,:); repmat(K(160,:),800,1)];
 colormap(K2);
@@ -83,20 +70,8 @@ set(cb,'TickLength',[0 0.01]);
 set(cb,'Box','off');
 grid off
 
-figure(4)
-load('frequencies_RE.mat');
-h(1) = plot(1./repelem(P1_hawkmoth,3),F(1).f,'-o','color',C2(1,:),'MarkerFaceColor',C2(1,:));
-hold on;
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-xlabel('P1');
-ylabel('P3');
-legend(h,'hawkmoth','hummingbird');
-title('min_spring_energy/phi_inertia');
-set(gca, 'XScale', 'log');
-xlim(XL);
-ylim(YL);
 
-figure(5)
+figure(3)
 surf(1./P1allfinal(1,indicesp1), P3all, Waall./Total_muscle_work,'edgecolor','none','facecolor','interp');
 XL = get(gca,'Xlim');
 YL = get(gca,'Ylim');
@@ -108,22 +83,8 @@ set(cb,'Box','off');
 set(gca,'XTick',[], 'YTick', [])
 grid off
 
-figure(6)
-load('frequencies_RE.mat');
-h(1) = plot(1./repelem(P1_hawkmoth,3),F(1).f,'-o','color',C2(1,:),'MarkerFaceColor',C2(1,:));
-hold on;
-xlabel('P1');
-ylabel('P3');
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-legend(h,'hawkmoth','hummingbird');
-title('muscle efficiency');
-set(gca, 'XScale', 'log');
-xlim(XL);
-ylim(YL);
 
-% close all;
-
-figure(7)
+figure(4)
 K = colormap(turbo(200));
 K2 = [K(1:160,:); repmat(K(160,:),800,1)];
 colormap(K2);
@@ -137,15 +98,3 @@ ylim([min(P3all) max(P3all)]);
 XL = get(gca,'Xlim');
 YL = get(gca,'Ylim');
 grid off
-
-
-figure(8)
-load('frequencies_RE.mat');
-h(1) = plot(ones(1,3)./P1_hawkmoth,F(1).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-hold on;
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-legend(h,'hawkmoth','hummingbird');
-set(gca, 'XScale', 'log');
-xlim(XL);
-ylim(YL);
-
