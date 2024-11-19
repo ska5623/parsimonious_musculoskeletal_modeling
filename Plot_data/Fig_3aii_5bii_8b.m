@@ -82,19 +82,3 @@ set(gca, 'XScale', 'log');
 set(cb,'Box','off');
 set(gca,'XTick',[], 'YTick', [])
 grid off
-
-
-figure(4)
-K = colormap(turbo(200));
-K2 = [K(1:160,:); repmat(K(160,:),800,1)];
-colormap(K2);
-EEvals = Min_Spring_energy.*phi_inertia;
-surf(1./P1allfinal(1,indicesp1), P3all, EEvals,'edgecolor','none','facecolor','interp');
-view(0,90);
-set(gca, 'XScale', 'log');
-set(gca,'XTick',[], 'YTick', []);
-xlim([1./P1allfinal(1,end) 10]);
-ylim([min(P3all) max(P3all)]);
-XL = get(gca,'Xlim');
-YL = get(gca,'Ylim');
-grid off
