@@ -32,7 +32,7 @@ for p1i = 1:1:length(P1allnew)
           Otherparams(1,6) = workn;
           Otherparams(1,7) = abs(workn)/abs(workn + workp); 
           filestr = ['Emergent_time_amplitude/dataasync_' num2str(p1i) '_' num2str(ai) '.mat'];
-          save(filestr,'disp','muscleforce_d','Otherparams','muscleforce_u','inertiaenergy','vel','workp','workn','accel','aerowork','tspringwork','uspringwork','dspringwork','posforcework','negforcework','posforce','negforce','P2');
+          save(filestr,'disp','muscleforce_d','Otherparams','muscleforce_u','inertiaenergy','vel','workp','workn','accel','aerowork','tspringwork','uspringwork','dspringwork','posforcework','negforcework','posforce','negforce','P2','time');
     end 
 end
 
