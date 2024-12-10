@@ -19,7 +19,6 @@ limitsalln(4,15:24) = 0.04;
 limitsalln(4,25:length(P1allfinal)) = 0.1;
 dt = 0.001;
 P2initial = 1;
-Otherparams = zeros(length(P1allfinal),length(P3all));
 for p3i = 1:1:length(P3all)
     P3 = P3all(p3i);
     P2new = zeros(1,length(P1allfinal));
@@ -44,7 +43,7 @@ for p3i = 1:1:length(P3all)
         Adiffold = abs(A - 2);
         index = 1;
         limitsall = limitsalln;
-        while abs(A - 2) > 0.05
+        while abs(A - 2) > 0.025
             if index > 1 && Adiffold < abs(A - 2)
                 limitsall = limitsall/2;
             end
@@ -54,7 +53,7 @@ for p3i = 1:1:length(P3all)
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(2,p1i);
             elseif A - 2 > 0.1
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(3,p1i);
-            elseif A - 2 > 0.05
+            elseif A - 2 > 0.025
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(4,p1i);
             elseif A - 2 < -0.5
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(1,p1i);
@@ -62,7 +61,7 @@ for p3i = 1:1:length(P3all)
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(2,p1i);
             elseif A - 2 < -0.1
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(3,p1i);
-            elseif A - 2 < -0.05
+            elseif A - 2 < -0.025
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(4,p1i);
             end
             if P2new(1,p1i) < 0
@@ -78,12 +77,11 @@ for p3i = 1:1:length(P3all)
         end
 
         Otherparams(p1i,1) = dampmaxwork;
-        Otherparams(p1i,2) = maxdspringwork;
-        Otherparams(p1i,3) = maxinertiaenergy;
-        Otherparams(p1i,4) = maxinertiaenergy/dampmaxwork;
-        Otherparams(p1i,5) = workp;
-        Otherparams(p1i,6) = workn;
-        Otherparams(p1i,7) = abs(workn)/abs(workn + workp);
+        Otherparams(p1i,2) = maxinertiaenergy;
+        Otherparams(p1i,3) = maxinertiaenergy/dampmaxwork;
+        Otherparams(p1i,4) = workp;
+        Otherparams(p1i,5) = workn;
+        Otherparams(p1i,6) = abs(workn)/abs(workn + workp);
         filestr = ['Consolidated_data_sync_no_stiff/sync_all_data_final_no_spring_' num2str(P3) '.mat'];
         save(filestr,'Otherparams','P2new');
     end

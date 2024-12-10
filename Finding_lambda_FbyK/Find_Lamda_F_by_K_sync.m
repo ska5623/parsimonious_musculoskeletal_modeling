@@ -1,5 +1,5 @@
 P1allfinal = [0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.75 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
-P3all = [0.4 0.6 0.8 0.9 1 1.1 1.2 1.4 1.6 1.8 2 2.2];
+P3all = [0.4 0.5 0.6 0.7 0.8 0.85 0.9 0.95 1 1.05 1.1 1.2 1.4 1.6 1.8 2 2.2];
 limitsalln = zeros(4,length(P1allfinal));
 limitsalln(1,1:4) = 0.5;
 limitsalln(1,5:14) = 1;
@@ -52,7 +52,7 @@ for p3i = 1:1:length(P3all)
         Adiffold = abs(A - 2);
         index = 1;
         limitsall = limitsalln;
-        while abs(A - 2) > 0.05
+        while abs(A - 2) > 0.005
             if index > 1 && Adiffold < abs(A - 2)
                 limitsall = limitsall/2;
             end
@@ -62,7 +62,7 @@ for p3i = 1:1:length(P3all)
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(2,p1i);
             elseif A - 2 > 0.1
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(3,p1i);
-            elseif A - 2 > 0.05
+            elseif A - 2 > 0.005
                 P2new(1,p1i) = P2new(1,p1i) - limitsall(4,p1i);
             elseif A - 2 < -0.5
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(1,p1i);
@@ -70,7 +70,7 @@ for p3i = 1:1:length(P3all)
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(2,p1i);
             elseif A - 2 < -0.1
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(3,p1i);
-            elseif A - 2 < -0.05
+            elseif A - 2 < -0.005
                 P2new(1,p1i) = P2new(1,p1i) + limitsall(4,p1i);
             end
             if P2new(1,p1i) < 0

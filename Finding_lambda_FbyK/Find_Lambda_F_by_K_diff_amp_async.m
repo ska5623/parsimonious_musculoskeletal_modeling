@@ -4,12 +4,12 @@ Achange_all = [0.6 0.8 1.0 1.2 1.4];
 
 t0 = 0.5;
 limitasyncn = zeros(length(P1allnew),1);
-limitasyncn(1:5,1) = 0.003;
-limitasyncn(6:10,1) = 0.006;
-limitasyncn(11:15,1) = 0.01;
-limitasyncn(16:20,1) = 0.02;
-limitasyncn(21:25,1) = 0.04;
-limitasyncn(25:length(P1allnew),1) = 0.08;
+limitasyncn(1:5,1) = 0.01;
+limitasyncn(6:10,1) = 0.01;
+limitasyncn(11:15,1) = 0.1;
+limitasyncn(16:20,1) = 0.25;
+limitasyncn(21:25,1) = 0.5;
+limitasyncn(25:length(P1allnew),1) = 1;
 
 filestr = ['Consolidated_data_async/async_all_data_final_' num2str(t0) '.mat'];
 load(filestr);
