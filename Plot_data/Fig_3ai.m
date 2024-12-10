@@ -19,6 +19,8 @@ end
 
 figure(1)
 surf(1./P1allfinal(1,indicesp1), P3all, Waall./Total_muscle_work,'edgecolor','none','facecolor','interp');
+hold on;
+contour3(1./P1allfinal(1,indicesp1), P3all, Waall./Total_muscle_work, [0.2 0.4 0.6 0.8 1],'ShowText','on','color','black','linewidth',2)
 XL = get(gca,'Xlim');
 YL = get(gca,'Ylim');
 view(0,90);
@@ -30,3 +32,5 @@ grid off
 title('muscle efficiency');
 xlim([0.1 10]);
 ylim([min(P3all) max(P3all)]);
+%saveas(gcf,'C:\Users\suyas\OneDrive - The Pennsylvania State University\Box sync\PhD\Journal papers\Work loop paper\Figures\pdfs\contours\phiMEnoSpring.pdf')
+exportgraphics(gcf,'C:\Users\suyas\OneDrive - The Pennsylvania State University\Box sync\PhD\Journal papers\Work loop paper\Figures\pdfs\contours\phiMEnoSpring.eps','ContentType','vector');

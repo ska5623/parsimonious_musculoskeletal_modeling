@@ -31,6 +31,8 @@ indicesp1 = 1:1:length(P1allfinal);
 
 figure(1)
 surf(1./P1allfinal(1,indicesp1), P3all, Phaseall(indicesp1,:)','edgecolor','none','facecolor','interp');
+hold on;
+contour3(1./P1allfinal(1,indicesp1), P3all, 0.01+Phaseall(indicesp1,:)',[-0.2 -0.1 0 0.1 0.2],'ShowText','on','color','black','linewidth',2)
 colormap(parula(50));
 XL = get(gca,'Xlim');
 YL = get(gca,'Ylim');
@@ -41,17 +43,6 @@ set(cb,'Box','off');
 set(gca, 'XScale', 'log');
 set(gca,'XTick',[], 'YTick', []);
 grid off
+%saveas(gcf,'C:\Users\suyas\OneDrive - The Pennsylvania State University\Box sync\PhD\Journal papers\Work loop paper\Figures\pdfs\contours\Tactive.pdf')
+exportgraphics(gcf,'C:\Users\suyas\OneDrive - The Pennsylvania State University\Box sync\PhD\Journal papers\Work loop paper\Figures\pdfs\contours\Tactive.eps','ContentType','vector');
 
-
-figure(2)
-xlabel('P1');
-ylabel('P3');
-load('frequencies_RE.mat');
-h(1) = plot(1./repelem(P1_hawkmoth,3),F(1).f,'-o','color',C2(1,:),'MarkerFaceColor',C2(1,:));
-hold on;
-h(2) = plot(1./P1_hummingbird,F(2).f,'-o','color',C2(2,:),'MarkerFaceColor',C2(2,:));
-legend(h,'hawkmoth','hummingbird');
-title('active_time');
-xlim([0.1 10]);
-ylim(YL);
-set(gca, 'XScale', 'log');
