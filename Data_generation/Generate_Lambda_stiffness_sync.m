@@ -15,7 +15,7 @@ ku = 0.5;
 kd = 0.5;
 kt = 1 - ku - kd;
 
-for p3i = 5:1:5
+for p3i = 1:1:5
     P3 = P3all(1,p3i);
     for p1i = 2 %1:1:length(Indices)
        filestr = ['Consolidated_data_sync/sync_all_data_final_' num2str(P3) '.mat'];

@@ -7,6 +7,7 @@ for p3i = 1:1:length(P3all)
     P3 = P3all(p3i);
     filestr = ['Consolidated_data_sync_no_stiff/sync_all_data_final_no_spring_' num2str(P3) '.mat'];
     load(filestr,'P2new');
+    index = 1;
     for p1i = 1:1:length(P1allfinal)
         P1 = P1allfinal(1,p1i);
         P2 = P2new(1,p1i);
