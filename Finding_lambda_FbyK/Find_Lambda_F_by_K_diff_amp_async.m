@@ -1,0 +1,69 @@
+clear;
+P1allnew = [0.1 0.2 0.3 0.4 0.5 0.75 1 1.1 1.25 1.37 1.5 1.63 1.75 1.87 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10];
+Achange_all = [0.6 0.8 1.0 1.2 1.4];
+
+t0 = 0.5;
+limitasyncn = zeros(length(P1allnew),1);
+limitasyncn(1:5,1) = 0.01;
+limitasyncn(6:10,1) = 0.01;
+limitasyncn(11:15,1) = 0.1;
+limitasyncn(16:20,1) = 0.25;
+limitasyncn(21:25,1) = 0.5;
+limitasyncn(25:length(P1allnew),1) = 1;
+
+filestr = ['Consolidated_data_async/async_all_data_final_' num2str(t0) '.mat'];
+load(filestr);
+
+xu_min = 0;
+xd_max = 0.5;
+xt = 0;
+dt = 0.001;
+
+ku = 0.5;
+kd = 0.5;
+kt = 1 - ku - kd;
+Ad = [1 1.5 2 2.5 3];
+
+for p1i = 1:1:length(P1allnew)
+    P1 = P1allnew(1,p1i);
+    P2_nominal = P2new(1,p1i);
+    for ai = 1:1:5
+          P2 = P2_nominal;
+          out = sim('async_flier_modelling_non_d.slx',500);
+          async_flier_model_params_non_d
+          A = max(disp) - min(disp);
+          Aolddiff = abs(A - Ad(1,ai));
+          limitasync = limitasyncn;
+          if abs(A - Ad(1,ai)) < 0.025
+          else
+              index = 1;
+              while abs(A - Ad(1,ai)) > 0.025 && P2 > 0
+                  if index > 1 && abs(A-Ad(1,ai)) > Aolddiff
+                      limitasync = limitasync/2;
+                  end
+                  if A - Ad(1,ai) > 0.025
+                      P2 = P2 - limitasync(p1i,1);
+                  elseif A - Ad(1,ai) < -0.025
+                      P2 = P2 + limitasync(p1i,1);
+                  end
+                  out = sim('async_flier_modelling_non_d.slx',500);
+                  async_flier_model_params_non_d
+                  Aolddiff = abs(A - Ad(1,ai));
+                  A = max(disp) - min(disp);
+                  [P2 A]
+                  index = index + 1;
+              end
+          end
+          Otherparams(1,1) = dampmaxwork;
+          Otherparams(1,2) = maxdspringwork;
+          Otherparams(1,3) = maxinertiaenergy;
+          Otherparams(1,4) = maxinertiaenergy/dampmaxwork;
+          Otherparams(1,5) = workp;
+          Otherparams(1,6) = workn;
+          Otherparams(1,7) = abs(workn)/abs(workn + workp); 
+          filestr = ['Emergent_time_amplitude/dataasync_' num2str(p1i) '_' num2str(ai) '.mat'];
+          save(filestr,'disp','muscleforce_d','Otherparams','muscleforce_u','inertiaenergy','vel','workp','workn','accel','aerowork','tspringwork','uspringwork','dspringwork','posforcework','negforcework','posforce','negforce','P2');
+    end 
+end
+
+
